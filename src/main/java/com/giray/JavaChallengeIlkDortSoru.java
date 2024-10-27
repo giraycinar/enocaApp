@@ -128,7 +128,7 @@ public class JavaChallengeIlkDortSoru {
         System.out.println("Missing Element: " + missingElement);
     }
 
-    // Eksik eleman için metot
+    // Eksik eleman için metot.
     public static Integer findMissingElement(List<Integer> originalList, List<Integer> copyList) {
         int sumOriginal = 0;
         int sumCopy = 0;
