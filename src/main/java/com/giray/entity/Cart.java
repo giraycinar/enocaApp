@@ -26,4 +26,11 @@ public class Cart extends BaseEntity {
         this.items = new ArrayList<>(); // Boþ sepet öðeleri
         this.totalPrice = 0.0; // Baþlangýçta toplam fiyat
     }
+
+    // Toplam fiyatý güncelleyen metod
+    public void updateTotalPrice() {
+        totalPrice = items.stream()
+                .mapToDouble(item -> item.getPrice() * item.getQuantity())
+                .sum();
+    }
 }

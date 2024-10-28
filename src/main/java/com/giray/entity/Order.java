@@ -10,9 +10,10 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(collation = "orders")
+@Document(collection = "orders")
 public class Order extends BaseEntity {
 
+    private String orderId;
     private String customerId;
     private List<Product> products;
     private List<CartItem> items;

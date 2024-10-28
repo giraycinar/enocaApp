@@ -15,4 +15,6 @@ public class CartItem {
     private String productId;
     private Double price;
     private int quantity;
+
+    
 }
