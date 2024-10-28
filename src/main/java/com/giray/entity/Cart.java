@@ -10,7 +10,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(collation = "carts")
+@Document(collection = "carts")
 public class Cart extends BaseEntity {
 
     private String customerId;
