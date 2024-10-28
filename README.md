@@ -48,6 +48,7 @@ Bu `README.md` bölümü, yapılandırma ayarlarını ve kullanım bilgilerini a
   -  MapStruct: Nesne dönüştürme işlemleri için.
   -  Springdoc OpenAPI: API dokümantasyonu için.
 
+  -  Constructorlar yerine lombok anatasyonları ile hazırlanmıştır. RestApiURL ile yollar belirtilmiştir.
 
 
 ### (ÖNEMLİ) --> İlk 4 Proje com.giray->ilkDortSoru Klasörünün içerisinedir.
@@ -110,4 +111,30 @@ Bu `README.md` bölümü, yapılandırma ayarlarını ve kullanım bilgilerini a
 ![Resim Açıklaması](https://raw.githubusercontent.com/giraycinar/enocaApp/main/src/main/resources/images/12.png)
 
 
+###   Minimum Sistem Gereksinimleri
+    Java:
 
+-    Java JDK 21: Proje, Java 21 kullanmaktadır. JDK'nın en son sürümünü Oracle veya OpenJDK üzerinden indirip kurabilirsiniz.
+    Spring Boot:
+
+-    Spring Boot 3.3.5: Projede kullanılan Spring Boot sürümü 3.3.5. Bu sürüm, gerekli kütüphaneleri ve özellikleri sağlayacaktır.
+    Veritabanı:
+
+-    MongoDB: Proje, MongoDB ile çalışmakta ve en az 4.0 sürümünü gerektirir. MongoDB'yi sisteminize kurmalısınız.
+    H2 Database: Geliştirme ve test amaçları için H2 veritabanı kullanılmaktadır.
+    Bağımlılıklar:
+
+-    Maven: Projeyi yönetmek için Maven kullanılmaktadır. Maven'ı Maven Resmi Sitesinden indirip kurabilirsiniz.
+-    Lombok: Otomatik getter, setter gibi metodları oluşturmak için Lombok kullanılmaktadır. IDE'nizde Lombok desteğini etkinleştirmeniz gerekebilir.
+-    MapStruct: Java nesneleri arasında dönüşüm yapmak için kullanılmaktadır.
+-    SpringDoc: API dokümantasyonu için OpenAPI desteği sunmaktadır.
+-    IDE:
+
+-    IntelliJ IDEA veya Eclipse: Java ve Spring Boot projeleri geliştirmek için tercih edebileceğiniz IDE'lerdir. IntelliJ IDEA'nın en son sürümünü JetBrains resmi web sitesinden indirebilirsiniz.
+-    Önerilen Donanım Gereksinimleri
+    RAM: Minimum 4 GB (Önerilen 8 GB veya daha fazla)
+    İşlemci: Çok çekirdekli işlemci (Intel i5 veya eşdeğeri)
+    Disk Alanı: Minimum 2 GB boş alan (Proje ve bağımlılıklar için)
+    Notlar
+    Geliştirme sırasında bilgisayarınızın yeterli bellek ve işlemci gücüne sahip olması, performansı artıracaktır.
+    Projeyi çalıştırmadan önce, gerekli tüm bağımlılıkların kurulu olduğundan emin olun.
