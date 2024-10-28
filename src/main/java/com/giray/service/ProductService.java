@@ -22,7 +22,6 @@ public class ProductService {
     }
 
 
-
     public void deleteProductById(String id) {
         if (!productRepository.existsById(id)) {
             throw new RuntimeException("Product not found with id: " + id);
@@ -39,7 +38,7 @@ public class ProductService {
         if (!productRepository.existsById(id)) {
             throw new RuntimeException("Product not found with id: " + id);
         }
-        product.setId(id); // Güncelleme iþleminde id'yi ayarla
+        product.setId(id);
         return productRepository.save(product);
     }
 

@@ -8,6 +8,5 @@ import java.util.List;
 
 @Repository
 public interface OrderRepository extends MongoRepository<Order, String> {
-    // Müþteri ID'sine göre sipariþleri bulmak için metod
     List<Order> findByCustomerId(String customerId);
 }

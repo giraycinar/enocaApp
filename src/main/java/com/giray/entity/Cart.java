@@ -19,18 +19,18 @@ public class Cart extends BaseEntity {
     private Double totalPrice = 0.0;
 
 
-    // Müþteri ID'si ile yeni bir sepet oluþturmak için yapýlandýrýcý
     public Cart(String customerId) {
         this.customerId = customerId;
-        this.products = new ArrayList<>(); // Boþ ürün listesi
-        this.items = new ArrayList<>(); // Boþ sepet öðeleri
-        this.totalPrice = 0.0; // Baþlangýçta toplam fiyat
+        this.products = new ArrayList<>();
+        this.items = new ArrayList<>();
+        this.totalPrice = 0.0;
     }
 
-    // Toplam fiyatý güncelleyen metod
     public void updateTotalPrice() {
-        totalPrice = items.stream()
-                .mapToDouble(item -> item.getPrice() * item.getQuantity())
-                .sum();
+        double totalPrice = 0.0;
+        for (CartItem item : items) {
+            totalPrice += item.getPrice() * item.getQuantity();
+        }
+        this.totalPrice = totalPrice;
     }
 }

@@ -32,19 +32,18 @@ public class CartService {
 
 
 
-    // Müþteri kimliðine göre sepeti almak için metod
+
     public Cart getCart(String customerId) {
         Optional<Cart> cart = cartRepository.findOptionalByCustomerId(customerId);
         return cartRepository.findOptionalByCustomerId(customerId)
                 .orElseGet(() -> {
                     Cart newCart = new Cart(customerId);
-                    return cartRepository.save(newCart); // Yeni sepeti veritabanýna kaydet
+                    return cartRepository.save(newCart);
                 });
 
     }
 
     public Cart addProductToCart(String customerId, String productId, int quantity) {
-        // Öncelikle ürünü ProductRepository'den buluyoruz
         Optional<Product> productOptional = productRepository.findById(productId);
         if (productOptional.isEmpty()) {
             throw new RuntimeException("Product not found with id: " + productId);
@@ -52,104 +51,124 @@ public class CartService {
 
         Product product = productOptional.get();
 
-        // Müþteri ID'sine göre sepeti bul veya yoksa yeni bir tane oluþtur
-        Cart cart = cartRepository.findByCustomerId(customerId).orElse(new Cart(customerId));
 
-        // Ürünü sepete ekliyoruz
+        if (product.getStock() < quantity) {
+            throw new RuntimeException("Not enough stock for product: " + productId);
+        }
+
+        Cart cart = cartRepository.findByCustomerId(customerId).orElse(new Cart(customerId));
         CartItem cartItem = new CartItem(product.getId(), product.getPrice(), quantity);
         cart.getItems().add(cartItem);
         cart.setTotalPrice(cart.getTotalPrice() + product.getPrice() * quantity);
 
-        // Sepeti kaydediyoruz
+        product.setStock(product.getStock() - quantity);
+        productRepository.save(product);
+
+        cart.updateTotalPrice();
         return cartRepository.save(cart);
     }
 
+
     public Cart removeProductFromCart(String customerId, String productId) {
-        // Sepeti müþteri ID'sine göre al
         Cart cart = cartRepository.findByCustomerId(customerId)
                 .orElseThrow(() -> new RuntimeException("Cart not found for customer: " + customerId));
 
-        // Sepette çýkarýlacak ürünü bul
         Optional<CartItem> itemToRemove = cart.getItems().stream()
                 .filter(item -> item.getProductId().equals(productId))
                 .findFirst();
-
-        // Ürün mevcutsa kaldýr
         if (itemToRemove.isPresent()) {
             CartItem cartItem = itemToRemove.get();
             cart.getItems().remove(cartItem);
 
-            // Toplam fiyatý güncelle
-            double updatedTotalPrice = cart.getTotalPrice() - (cartItem.getPrice() * cartItem.getQuantity());
-            cart.setTotalPrice(updatedTotalPrice);
+            cart.updateTotalPrice();
 
-            // Sepeti güncelleyip kaydet
             return cartRepository.save(cart);
         } else {
             throw new RuntimeException("Product not found in cart with id: " + productId);
         }
     }
 
-    // Cart güncelleme iþlemi
+
     public Cart updateCart(String customerId, List<CartItem> updatedItems) {
-        // Sepeti müþteri ID'sine göre bul veya yeni bir tane oluþtur
         Cart cart = cartRepository.findByCustomerId(customerId).orElse(new Cart(customerId));
-
-        // Mevcut toplam fiyatý sýfýrla
+        cart.getItems().clear();
         double totalPrice = 0.0;
-
-        // Güncellenmiþ öðeleri iþleyip sepete ekle veya miktarlarýný güncelle
         for (CartItem updatedItem : updatedItems) {
-            cart.getItems().removeIf(item -> item.getProductId().equals(updatedItem.getProductId()));
             cart.getItems().add(updatedItem);
-
-            // Ürünün fiyatýný ve miktarýný kullanarak toplam fiyatý güncelle
             totalPrice += updatedItem.getPrice() * updatedItem.getQuantity();
         }
-
-        // Güncellenen toplam fiyatý ayarla
         cart.setTotalPrice(totalPrice);
-
-        // Sepeti kaydedip güncellenmiþ halini döndür
         return cartRepository.save(cart);
     }
 
-    // Sepeti boþaltma iþlemi
+
+
     public Cart emptyCart(String customerId) {
-        // Müþteri kimliðine göre sepete eriþim
         Cart cart = cartRepository.findByCustomerId(customerId)
                 .orElseThrow(() -> new RuntimeException("Sepet bulunamadý!"));
 
-        // Sepet öðelerini temizle
-        cart.setItems(new ArrayList<>()); // Boþ bir liste ile güncelle
-        cart.setTotalPrice(0.0); // Toplam fiyatý sýfýrla
 
-        // Güncellenmiþ sepeti kaydet
+        cart.setItems(new ArrayList<>());
+        cart.setTotalPrice(0.0);
+
+
         return cartRepository.save(cart);
     }
 
-    // Sipariþ verme iþlemi
+
     public Order placeOrder(String customerId) {
-        // Müþteri kimliðine göre sepete eriþim
         Cart cart = cartRepository.findByCustomerId(customerId)
                 .orElseThrow(() -> new RuntimeException("Sepet bulunamadý!"));
 
-        // Yeni bir sipariþ oluþturma
+
         Order order = Order.builder()
                 .customerId(customerId)
-                .products(cart.getProducts()) // Sepetteki ürünler
-                .items(cart.getItems()) // Sepetteki öðeler
-                .totalPrice(cart.getTotalPrice()) // Toplam fiyat
-                .orderDate(LocalDateTime.now()) // Sipariþ tarihi
+                .products(cart.getProducts())
+                .totalPrice(cart.getTotalPrice())
+                .orderDate(LocalDateTime.now())
                 .build();
 
-        // Sipariþi veritabanýna kaydet
+
         orderRepository.save(order);
 
-        // Sepeti boþalt
-        emptyCart(customerId); // Sepeti boþaltmak için metodu çaðýr
+        emptyCart(customerId);
 
         return order;
     }
+
+
+
+//    public Order placeOrder(String customerId) {
+//        Cart cart = cartRepository.findByCustomerId(customerId)
+//                .orElseThrow(() -> new RuntimeException("Sepet bulunamadý!"));
+//
+//
+//        Order order = Order.builder()
+//                .customerId(customerId)
+//                .items(cart.getItems())
+//                .totalPrice(cart.getTotalPrice())
+//                .orderDate(LocalDateTime.now())
+//                .build();
+//
+
+//        orderRepository.save(order);
+//
+//
+//        for (CartItem item : cart.getItems()) {
+//            Optional<Product> productOptional = productRepository.findById(item.getProductId());
+//            if (productOptional.isPresent()) {
+//                Product product = productOptional.get();
+//                product.setStock(product.getStock() - item.getQuantity());
+//                productRepository.save(product);
+//            }
+//        }
+//
+//
+//        emptyCart(customerId);
+//
+//        return order;
+//    }
+
+
 
 }

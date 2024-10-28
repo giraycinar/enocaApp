@@ -17,12 +17,10 @@ public class OrderService {
         this.orderRepository = orderRepository;
     }
 
-    // Sipariþ koduna göre sipariþi almak için metod
     public Order getOrderForCode(String orderId) {
         Optional<Order> order = orderRepository.findById(orderId);
-        return order.orElseThrow(() -> new RuntimeException("Sipariþ bulunamadý!")); // Sipariþ yoksa hata fýrlat
+        return order.orElseThrow(() -> new RuntimeException("Sipariþ bulunamadý!"));
     }
-    // Müþteri ID'sine göre tüm sipariþleri almak için metod
     public List<Order> getAllOrdersFromCustomer(String customerId) {
         return orderRepository.findByCustomerId(customerId);
     }

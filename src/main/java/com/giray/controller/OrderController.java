@@ -22,13 +22,11 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-    // Sipariþ koduna göre sipariþi almak için metod
     @GetMapping("/{orderId}")
     public Order getOrderForCode(@PathVariable("orderId") String orderId) {
         return orderService.getOrderForCode(orderId);
     }
 
-    // Müþteri ID'sine göre tüm sipariþleri almak için metod
     @GetMapping("/customer/{customerId}")
     public List<Order> getAllOrdersFromCustomer(@PathVariable("customerId") String customerId) {
         return orderService.getAllOrdersFromCustomer(customerId);
