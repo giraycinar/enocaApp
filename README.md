@@ -96,18 +96,18 @@ Bu `README.md` bölümü, yapılandırma ayarlarını ve kullanım bilgilerini a
     └── README.md
 
 
+![Resim Açıklaması](https://raw.githubusercontent.com/giraycinar/enocaApp/main/src/main/resources/images/1.png)
+![Resim Açıklaması](https://raw.githubusercontent.com/giraycinar/enocaApp/main/src/main/resources/images/2.png)
+![Resim Açıklaması](https://raw.githubusercontent.com/giraycinar/enocaApp/main/src/main/resources/images/3.png)
+![Resim Açıklaması](https://raw.githubusercontent.com/giraycinar/enocaApp/main/src/main/resources/images/4.png)
+![Resim Açıklaması](https://raw.githubusercontent.com/giraycinar/enocaApp/main/src/main/resources/images/5.png)
+![Resim Açıklaması](https://raw.githubusercontent.com/giraycinar/enocaApp/main/src/main/resources/images/6.png)
+![Resim Açıklaması](https://raw.githubusercontent.com/giraycinar/enocaApp/main/src/main/resources/images/7.png)
+![Resim Açıklaması](https://raw.githubusercontent.com/giraycinar/enocaApp/main/src/main/resources/images/8.png)
+![Resim Açıklaması](https://raw.githubusercontent.com/giraycinar/enocaApp/main/src/main/resources/images/9.png)
+![Resim Açıklaması](https://raw.githubusercontent.com/giraycinar/enocaApp/main/src/main/resources/images/10.png)
+![Resim Açıklaması](https://raw.githubusercontent.com/giraycinar/enocaApp/main/src/main/resources/images/11.png)
+![Resim Açıklaması](https://raw.githubusercontent.com/giraycinar/enocaApp/main/src/main/resources/images/12.png)
 
 
 
-![Resim Açıklaması](https://github.com/giraycinar/enocaApp/raw/main/images/1.png)
-![Resim Açıklaması](https://github.com/giraycinar/enocaApp/raw/main/images/2.png)
-![Resim Açıklaması](https://github.com/giraycinar/enocaApp/raw/main/images/3.png)
-![Resim Açıklaması](https://github.com/giraycinar/enocaApp/raw/main/images/4.png)
-![Resim Açıklaması](https://github.com/giraycinar/enocaApp/raw/main/images/5.png)
-![Resim Açıklaması](https://github.com/giraycinar/enocaApp/raw/main/images/6.png)
-![Resim Açıklaması](https://github.com/giraycinar/enocaApp/raw/main/images/7.png)
-![Resim Açıklaması](https://github.com/giraycinar/enocaApp/raw/main/images/8.png)
-![Resim Açıklaması](https://github.com/giraycinar/enocaApp/raw/main/images/9.png)
-![Resim Açıklaması](https://github.com/giraycinar/enocaApp/raw/main/images/10.png)
-![Resim Açıklaması](https://github.com/giraycinar/enocaApp/raw/main/images/11.png)
-![Resim Açıklaması](https://github.com/giraycinar/enocaApp/raw/main/images/12.png)
